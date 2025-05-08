@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passando per Modena - Sconto</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 50px;
+      background: url('reception.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #f4f4f4;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+      width: 250px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo-m14-hotel.png" alt="M14 Hotel & SPA Logo" class="logo">
+    <h1>Benvenuto da Passando per Modena</h1>
+    <p>Come ospiti dell'M14 Hotel & SPA, ricevete il 10% di sconto.</p>
+    <p>Inserisci la password per attivare lo sconto.</p>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="verifyCode()">Attiva sconto</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const validPassword = 'M14discount';
+
+    function checkAccessFromQR() {
+      const params = new URLSearchParams(window.location.search);
+      return params.has('qr') && params.get('qr') === 'true';
+    }
+
+    async function verifyCode() {
+      const pwd = document.getElementById('password').value.trim();
+      const msg = document.getElementById('message');
+
+      if (!checkAccessFromQR()) {
+        msg.style.color = 'red';
+        msg.textContent = '❌ Accesso non valido. Scansiona il QR code.';
+        return;
+      }
+      if (pwd !== validPassword) {
+        msg.style.color = 'red';
+        msg.textContent = '❌ Password errata.';
+        return;
+      }
+
+      msg.style.color = 'green';
+      msg.textContent = '✅ Password corretta. Sconto del 10% attivato!';
+      try {
+        await fetch('https://tuo-backend.it/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ristorante: 'Passando per Modena', timestamp: new Date().toISOString() })
+        });
+      } catch (err) { console.error('Errore rete:', err); }
+    }
+  </script>
+</body>
+</html>
