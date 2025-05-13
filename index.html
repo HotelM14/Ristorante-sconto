@@ -9,7 +9,8 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: url('reception.jpeg') no-repeat center center fixed;
-      background-size: 115%; /* Sfondo più "largo" visivamente */
+      background-size: cover;
+      background-position: center center;
     }
 
     .overlay {
@@ -44,16 +45,12 @@
       margin-bottom: 20px;
     }
 
-    .logo-left img {
-      height: 49px;
-      width: auto;
-      object-fit: contain;
-    }
-
+    .logo-left img,
     .logo-right img {
       height: 49px;
       width: auto;
       object-fit: contain;
+      display: block;
     }
 
     .divider {
