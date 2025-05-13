@@ -48,19 +48,18 @@
     .logo-left img {
       height: 49px;
       object-fit: contain;
-      padding-right: 10px; /* Avvicina il logo M14 alla X */
+      padding-right: 10px;
     }
 
     .logo-right img {
       height: 49px;
       object-fit: contain;
-      padding-left: 6px; /* Allontana leggermente il logo Modena dalla X */
+      padding-left: 6px;
     }
 
     .divider {
       font-size: 24px;
       font-weight: bold;
-      line-height: 1;
       height: 49px;
       display: flex;
       align-items: center;
@@ -100,6 +99,20 @@
 
     button:hover {
       background-color: #005fcc;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
     }
 
     @media (max-width: 480px) {
@@ -142,9 +155,24 @@
       <h2>Benvenuto da Passando per Modena</h2>
       <p>Come ospiti dell'M14 Hotel & SPA, ricevete il 10% di sconto.</p>
       <p>Inserisci la password per attivare lo sconto.</p>
-      <input type="password" placeholder="Password" />
-      <button>Attiva sconto</button>
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="checkPassword()">Attiva sconto</button>
+      <div id="message" class="message"></div>
     </div>
   </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
+      if (input === "Modena14") {
+        message.textContent = "✅ SCONTO ATTIVATO – Mostrare questa schermata al ristorante per ottenere il 10% di sconto.";
+        message.className = "message success";
+      } else {
+        message.textContent = "❌ Password errata. Riprova.";
+        message.className = "message error";
+      }
+    }
+  </script>
 </body>
 </html>
