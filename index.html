@@ -42,24 +42,18 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 20px;
-      text-align: center;
     }
 
-    .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Dimensioni specifiche per bilanciare i loghi */
     .logo-left img {
-      max-height: 35px;
+      height: 26px; /* aumentato da 22px */
       width: auto;
+      object-fit: contain;
     }
 
     .logo-right img {
-      max-height: 28px;
+      height: 32px; /* aumentato da 28px */
       width: auto;
+      object-fit: contain;
     }
 
     .divider {
@@ -113,11 +107,11 @@
       }
 
       .logo-left img {
-        max-height: 28px;
+        height: 22px;
       }
 
       .logo-right img {
-        max-height: 24px;
+        height: 28px;
       }
 
       .divider {
@@ -138,11 +132,11 @@
   <div class="overlay">
     <div class="popup">
       <div class="logos-grid">
-        <div class="logo logo-left">
+        <div class="logo-left">
           <img src="m14-logo.png" alt="Logo M14 Hotel" />
         </div>
         <div class="divider">×</div>
-        <div class="logo logo-right">
+        <div class="logo-right">
           <img src="logo_modena_marrone_transparent.png" alt="Logo Passando per Modena" />
         </div>
       </div>
