@@ -36,49 +36,37 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    .logos-wrapper {
-      position: relative;
-      width: 100%;
-      height: 40px;
+    .logos-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 20px;
+      text-align: center;
     }
 
-    .logo-left,
-    .logo-right,
-    .x-center {
-      position: absolute;
-      top: 0;
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+    }
+
+    .logo img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .divider {
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1;
       height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .logo-left {
-      right: 50%;
-      transform: translateX(-100%);
-      width: 100px;
-    }
-
-    .logo-right {
-      left: 50%;
-      transform: translateX(0%);
-      width: 100px;
-    }
-
-    .logo-left img,
-    .logo-right img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-    }
-
-    .x-center {
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 22px;
-      font-weight: bold;
-      line-height: 1;
     }
 
     h2 {
@@ -121,12 +109,11 @@
         padding: 25px 15px;
       }
 
-      .logo-left,
-      .logo-right {
-        width: 80px;
+      .logo img {
+        max-width: 80px;
       }
 
-      .x-center {
+      .divider {
         font-size: 18px;
       }
 
@@ -143,12 +130,12 @@
 <body>
   <div class="overlay">
     <div class="popup">
-      <div class="logos-wrapper">
-        <div class="logo-left">
+      <div class="logos-grid">
+        <div class="logo">
           <img src="m14-logo.png" alt="Logo M14 Hotel" />
         </div>
-        <div class="x-center">×</div>
-        <div class="logo-right">
+        <div class="divider">×</div>
+        <div class="logo">
           <img src="logo_modena_marrone_transparent.png" alt="Logo Passando per Modena" />
         </div>
       </div>
