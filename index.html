@@ -38,7 +38,7 @@
 
     .logos {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       gap: 15px;
       margin-bottom: 20px;
@@ -46,13 +46,16 @@
 
     .logos img {
       height: 40px;
-      max-width: 100px;
       object-fit: contain;
+      display: block;
     }
 
     .logos span {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
+      line-height: 40px;
+      display: flex;
+      align-items: center;
     }
 
     h2 {
@@ -97,7 +100,11 @@
 
       .logos img {
         height: 30px;
-        max-width: 80px;
+      }
+
+      .logos span {
+        font-size: 18px;
+        line-height: 30px;
       }
 
       h2 {
