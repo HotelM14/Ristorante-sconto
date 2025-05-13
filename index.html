@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Passando per Modena - Sconto</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SENMK1Y5CX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SENMK1Y5CX');
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -168,6 +178,12 @@
       if (input === "Modena14") {
         message.textContent = "✅ SCONTO ATTIVATO – Mostrare questa schermata al ristorante per ottenere il 10% di sconto.";
         message.className = "message success";
+
+        // 👉 Tracciamento evento su Google Analytics
+        gtag('event', 'sconto_attivato', {
+          'event_category': 'interazione',
+          'event_label': 'utente ha sbloccato lo sconto'
+        });
       } else {
         message.textContent = "❌ Password errata. Riprova.";
         message.className = "message error";
