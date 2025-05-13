@@ -2,136 +2,128 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Passando per Modena - Sconto</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
       background: url('reception.jpeg') no-repeat center center fixed;
       background-size: cover;
-      background-color: #f4f4f4;
     }
 
-    .container {
-      background: rgba(255, 255, 255, 0.85);
-      padding: 30px;
-      border-radius: 10px;
-      display: inline-block;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      max-width: 500px;
-    }
-
-    .collab-logos {
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .popup {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
       margin-bottom: 20px;
     }
 
-    .logo-small {
-      height: 50px;
-      width: 120px;
+    .logos img {
+      height: 40px;
+      max-width: 100px;
       object-fit: contain;
-      display: block;
     }
 
-    .logo-x {
-      font-size: 26px;
+    .logos span {
+      font-size: 20px;
       font-weight: bold;
-      color: #444;
-      line-height: 1;
-      position: relative;
-      top: 1.5px;
     }
 
-    h1 {
-      font-size: 22px;
+    h2 {
+      font-size: 20px;
       margin-bottom: 10px;
     }
 
     p {
-      margin: 5px 0;
-    }
-
-    input, button {
-      padding: 10px;
       font-size: 16px;
       margin: 10px 0;
-      width: 250px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
     }
 
     button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
     }
 
-    .message {
-      margin-top: 20px;
-      font-size: 18px;
+    button:hover {
+      background-color: #005fcc;
+    }
+
+    @media (max-width: 480px) {
+      .popup {
+        padding: 25px 15px;
+      }
+
+      .logos img {
+        height: 30px;
+        max-width: 80px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="collab-logos">
-      <img src="m14-logo.png" alt="Logo M14 Hotel & SPA" class="logo-small" />
-      <span class="logo-x">×</span>
-      <img src="logo_modena_marrone_transparent.png" alt="Logo Passando per Modena" class="logo-small" />
+  <div class="overlay">
+    <div class="popup">
+      <div class="logos">
+        <img src="logo-m14.png" alt="Logo M14 Hotel">
+        <span>x</span>
+        <img src="logo-modena.png" alt="Logo Passando per Modena">
+      </div>
+      <h2>Benvenuto da Passando per Modena</h2>
+      <p>Come ospiti dell'M14 Hotel & SPA, ricevete il 10% di sconto.</p>
+      <p>Inserisci la password per attivare lo sconto.</p>
+      <input type="password" placeholder="Password" />
+      <button>Attiva sconto</button>
     </div>
-
-    <h1>Benvenuto da Passando per Modena</h1>
-    <p>Come ospiti dell'M14 Hotel & SPA, ricevete il 10% di sconto.</p>
-    <p>Inserisci la password per attivare lo sconto.</p>
-
-    <input type="password" id="password" placeholder="Password" />
-    <br />
-    <button onclick="verifyCode()">Attiva sconto</button>
-
-    <div class="message" id="message"></div>
   </div>
-
-  <script>
-    const validPassword = 'M14discount';
-
-    function checkAccessFromQR() {
-      const params = new URLSearchParams(window.location.search);
-      return params.has('qr') && params.get('qr') === 'true';
-    }
-
-    async function verifyCode() {
-      const pwd = document.getElementById('password').value.trim();
-      const msg = document.getElementById('message');
-
-      if (!checkAccessFromQR()) {
-        msg.style.color = 'red';
-        msg.textContent = '❌ Accesso non valido. Scansiona il QR code.';
-        return;
-      }
-
-      if (pwd !== validPassword) {
-        msg.style.color = 'red';
-        msg.textContent = '❌ Password errata.';
-        return;
-      }
-
-      msg.style.color = 'green';
-      msg.textContent = '✅ Password corretta. Sconto del 10% attivato!';
-
-      try {
-        await fetch('https://tuo-backend.it/api/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            ristorante: 'Passando per Modena',
-            timestamp: new Date().toISOString()
-          })
-        });
-      } catch (err) {
-        console.error('Errore rete:', err);
-      }
-    }
-  </script>
 </body>
 </html>
