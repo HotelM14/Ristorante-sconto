@@ -45,12 +45,16 @@
       margin-bottom: 20px;
     }
 
-    .logo-left img,
+    .logo-left img {
+      height: 49px;
+      object-fit: contain;
+      padding-right: 10px; /* Avvicina il logo M14 alla X */
+    }
+
     .logo-right img {
       height: 49px;
-      width: auto;
       object-fit: contain;
-      display: block;
+      padding-left: 6px; /* Allontana leggermente il logo Modena dalla X */
     }
 
     .divider {
@@ -106,6 +110,7 @@
       .logo-left img,
       .logo-right img {
         height: 38px;
+        padding: 0;
       }
 
       .divider {
