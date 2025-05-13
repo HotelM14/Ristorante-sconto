@@ -37,10 +37,12 @@
     }
 
     .logo-x {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: bold;
       color: #444;
       line-height: 1;
+      position: relative;
+      top: 4px;
     }
 
     input, button {
@@ -101,7 +103,10 @@
         await fetch('https://tuo-backend.it/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ristorante: 'Passando per Modena', timestamp: new Date().toISOString() })
+          body: JSON.stringify({
+            ristorante: 'Passando per Modena',
+            timestamp: new Date().toISOString()
+          })
         });
       } catch (err) {
         console.error('Errore rete:', err);
