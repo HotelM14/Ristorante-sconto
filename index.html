@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Passando per Modena - Sconto</title>
-  <style> 
+  <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -34,15 +34,25 @@
     .logo-small {
       height: 50px;
       object-fit: contain;
+      display: block;
     }
 
     .logo-x {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: bold;
       color: #444;
       line-height: 1;
       position: relative;
-      top: 4px;
+      top: 1.5px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 5px 0;
     }
 
     input, button {
@@ -50,6 +60,10 @@
       font-size: 16px;
       margin: 10px 0;
       width: 250px;
+    }
+
+    button {
+      cursor: pointer;
     }
 
     .message {
@@ -61,16 +75,19 @@
 <body>
   <div class="container">
     <div class="collab-logos">
-      <img src="m14-logo.png" alt="Logo M14 Hotel & SPA" class="logo-small">
+      <img src="m14-logo.png" alt="Logo M14 Hotel & SPA" class="logo-small" />
       <span class="logo-x">×</span>
-      <img src="logo_modena_marrone_transparent.png" alt="Logo Passando per Modena" class="logo-small">
+      <img src="logo_modena_marrone_transparent.png" alt="Logo Passando per Modena" class="logo-small" />
     </div>
 
     <h1>Benvenuto da Passando per Modena</h1>
     <p>Come ospiti dell'M14 Hotel & SPA, ricevete il 10% di sconto.</p>
     <p>Inserisci la password per attivare lo sconto.</p>
-    <input type="password" id="password" placeholder="Password">
+
+    <input type="password" id="password" placeholder="Password" />
+    <br />
     <button onclick="verifyCode()">Attiva sconto</button>
+
     <div class="message" id="message"></div>
   </div>
 
@@ -91,6 +108,7 @@
         msg.textContent = '❌ Accesso non valido. Scansiona il QR code.';
         return;
       }
+
       if (pwd !== validPassword) {
         msg.style.color = 'red';
         msg.textContent = '❌ Password errata.';
@@ -99,6 +117,7 @@
 
       msg.style.color = 'green';
       msg.textContent = '✅ Password corretta. Sconto del 10% attivato!';
+
       try {
         await fetch('https://tuo-backend.it/api/register', {
           method: 'POST',
