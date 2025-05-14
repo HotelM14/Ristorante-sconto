@@ -1,18 +1,12 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Passando per Modena - Sconto</title>
+  <title>Passando per Modena - Discount</title>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) - only loaded when password is correct -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SENMK1Y5CX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-SENMK1Y5CX');
-  </script>
 
   <style>
     body {
@@ -155,37 +149,45 @@
     <div class="popup">
       <div class="logos-grid">
         <div class="logo-left">
-          <img src="m14-logo.png" alt="Logo M14 Hotel" />
+          <img src="m14-logo.png" alt="M14 Hotel logo" />
         </div>
         <div class="divider">×</div>
         <div class="logo-right">
-          <img src="logo_modena_marrone_transparent.png" alt="Logo Passando per Modena" />
+          <img src="logo_modena_marrone_transparent.png" alt="Passando per Modena logo" />
         </div>
       </div>
-      <h2>Benvenuto da Passando per Modena</h2>
-      <p>Come ospiti dell'M14 Hotel & SPA, ricevete il 10% di sconto.</p>
-      <p>Inserisci la password per attivare lo sconto.</p>
-      <input type="password" id="password" placeholder="Password" />
-      <button onclick="checkPassword()">Attiva sconto</button>
+      <h2>Welcome to Passando per Modena</h2>
+      <p>As a guest of M14 Hotel & SPA, you are entitled to a 10% discount.</p>
+      <p>Please enter the password to activate the discount.</p>
+      <input type="password" id="password" placeholder="Enter password" />
+      <button onclick="checkPassword()">Activate Discount</button>
       <div id="message" class="message"></div>
     </div>
   </div>
 
   <script>
+    // Google Analytics init (manual trigger only after correct password)
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
     function checkPassword() {
       const input = document.getElementById("password").value.trim();
       const message = document.getElementById("message");
+
       if (input === "Modena14") {
-        message.textContent = "✅ SCONTO ATTIVATO – Mostrare questa schermata al ristorante per ottenere il 10% di sconto.";
+        message.textContent = "✅ DISCOUNT ACTIVATED – Show this screen to the restaurant staff.";
         message.className = "message success";
 
-        // 👉 Tracciamento evento su Google Analytics
-        gtag('event', 'sconto_attivato', {
-          'event_category': 'interazione',
-          'event_label': 'utente ha sbloccato lo sconto'
+        // Trigger Analytics tracking ONLY now
+        gtag('js', new Date());
+        gtag('config', 'G-SENMK1Y5CX');
+        gtag('event', 'discount_unlocked', {
+          'event_category': 'interaction',
+          'event_label': 'guest unlocked discount'
         });
+
       } else {
-        message.textContent = "❌ Password errata. Riprova.";
+        message.textContent = "❌ Incorrect password. Please try again.";
         message.className = "message error";
       }
     }
